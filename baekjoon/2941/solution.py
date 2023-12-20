@@ -15,7 +15,7 @@ idx = 0
 while idx < len(word):
     check = False
 ​
-    for j in range(idx, idx + 4):
+    for j in range(idx + 1, idx + 4):
         w = word[idx:j]
         if w in cro:
             ans -= len(w) - 1
@@ -30,4 +30,3 @@ while idx < len(word):
 ​
 ​
 print(ans)
-​
