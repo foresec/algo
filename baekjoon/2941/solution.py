@@ -5,10 +5,29 @@ input = sys.stdin.readline
 ​
 cro = ["c=", "c-", "dz=", "d-", "lj", "nj", "s=", "z="]
 ​
+# 공백 제거 필요
 word = input().rstrip()
-ans = 0
 ​
-for c in cro:
-    ans += word.count(c)
+ans = len(word)
+idx = 0
 ​
-print(len(word) - ans)
+​
+while idx < len(word):
+    check = False
+​
+    for j in range(idx, idx + 4):
+        w = word[idx:j]
+        if w in cro:
+            ans -= len(w) - 1
+            idx += len(w)
+            check = True
+            break
+        else:
+            check = False
+​
+    if not check:
+        idx += 1
+​
+​
+print(ans)
+​
