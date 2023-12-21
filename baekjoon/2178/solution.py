@@ -22,6 +22,7 @@ while q:
 ​
     if x == N - 1 and y == M - 1:
         print(dis)
+        break
 ​
     for d in range(4):
         nx = x + dx[d]
