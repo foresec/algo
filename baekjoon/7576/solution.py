@@ -3,49 +3,39 @@
 import sys
 from collections import deque
 ​
-input = sys.stdin.readline
 ​
-dx = [1, 0, -1, 0]
-dy = [0, -1, 0, 1]
+def bfs(N, M):
+    q = deque()
+    flag = True
+    for i in range(N):
+        for j in range(M):
+            if arr[i][j] == 1:
+                q.append((i, j))
+            elif arr[i][j] == 0:
+                flag = False
 ​
-​
-def bfs(tom):
-    q = deque(tom)
+    if flag:
+        return 0
 ​
     while q:
-        x, y = q.popleft()
+        i, j = q.popleft()
+        for di, dj in [[0, 1], [1, 0], [0, -1], [-1, 0]]:
+            ni, nj = i + di, j + dj
+            if 0 <= ni < N and 0 <= nj < M and arr[ni][nj] == 0:
+                q.append((ni, nj))
+                arr[ni][nj] = arr[i][j] + 1
 ​
-        for d in range(4):
-            nx = x + dx[d]
-            ny = y + dy[d]
-​
-            if not (0 <= nx < N and 0 <= ny < M):
-                continue
-​
-            # 익지 않은 토마토이고, 방문한적 없다면
-            if arr[nx][ny] == 0:
-                q.append((nx, ny))
-                arr[nx][ny] = arr[x][y] + 1
+    ans = -1
+    for i in range(N):
+        for j in range(M):
+            if arr[i][j] == 0:
+                return -1
+            if ans < arr[i][j]:
+                ans = arr[i][j]
+    return ans - 1
 ​
 ​
-M, N = map(int, input().split())
-arr = [list(map(int, input().split())) for _ in range(N)]
-ans = 0
+M, N = map(int, sys.stdin.readline().split())
+arr = [list(map(int, sys.stdin.readline().split())) for _ in range(N)]
 ​
-tomato = []
-for i in range(N):
-    for j in range(M):
-        if arr[i][j] == 1:
-            tomato.append((i, j))
-​
-bfs(tomato)
-ans = max(max(row) for row in arr)
-​
-# 안익은 토마토가 남아있는지 확인
-for row in arr:
-    if 0 in row:
-        print(-1)
-        sys.exit(0)
-​
-print(ans - 1)
-​
+print(bfs(N, M))
