@@ -33,10 +33,11 @@ arr = [list(map(int, input().split())) for _ in range(N)]
 ​
 ​
 # 최대 높이를 구해서
-max_h = 0
-for a in arr:
-    if max(a) > max_h:
-        max_h = max(a)
+# max_h = 0
+# for a in arr:
+#     if max(a) > max_h:
+#         max_h = max(a)
+max_h = max(max(a) for a in arr)
 ​
 ​
 ans = 1
