@@ -12,8 +12,7 @@ dy = [0, -1, 0, 1]
 ​
 def bfs(i, j, visited, arr):
     visited[i][j] = True
-    q = deque()
-    q.append((i, j))
+    q = deque([(i, j)])
 ​
     while q:
         x, y = q.popleft()
@@ -48,6 +47,7 @@ ans = 0
 ​
 for comb in combinations(empty, 3):
     # check_arr = copy.deepcopy(arr)
+    # 아래와 같이 하면 시간이 반으로 줄음
     check_arr = [row[:] for row in arr]
     cnt = 0
 ​
