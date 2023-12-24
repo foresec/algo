@@ -8,8 +8,7 @@ dx = [1, 0, -1, 0]
 dy = [0, -1, 0, 1]
 ​
 ​
-def bfs(i, j):
-    global visited
+def bfs(i, j, visited):
     q = deque()
     q.append((i, j))
 ​
@@ -28,7 +27,6 @@ def bfs(i, j):
 ​
 # 비의 양에 따라 물에 잠기지 않는 안전한 영역의 개수 중 최대인 경우를 출력
 N = int(input())
-​
 arr = [list(map(int, input().split())) for _ in range(N)]
 ​
 ​
@@ -45,14 +43,13 @@ for h in range(1, max_h):
     # 각 높이 이상일 경우에 탐색하여 구역나누기
     cnt = 0
     visited = [[False] * N for _ in range(N)]
-​
     for i in range(N):
         for j in range(N):
             # 잠기지 않는 구역이 있을 때마다 cnt += 1
             if arr[i][j] > h and not visited[i][j]:
                 visited[i][j] = True
                 # 잠기지 않는 구역을 탐색 후 전부 잠긴 구역으로 바꾸기(탐색되지 않도록)
-                bfs(i, j)
+                bfs(i, j, visited)
                 
                 cnt += 1
 ​
