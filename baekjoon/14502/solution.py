@@ -47,7 +47,8 @@ for i in range(N):
 ans = 0
 ​
 for comb in combinations(empty, 3):
-    check_arr = copy.deepcopy(arr)
+    # check_arr = copy.deepcopy(arr)
+    check_arr = [row[:] for row in arr]
     cnt = 0
 ​
     for i, j in comb:
@@ -59,6 +60,7 @@ for comb in combinations(empty, 3):
     for i in range(N):
         for j in range(M):
             # check_arr의 바이러스를 찾아서 bfs로 퍼지도록
+            # 단, 2로 바꾼 후 다시 중복체크 되지 않도록 visited로 조건을 한번 더 걸어줌
             if check_arr[i][j] == 2 and not visited[i][j]:
                 bfs(i, j, visited, check_arr)
     
