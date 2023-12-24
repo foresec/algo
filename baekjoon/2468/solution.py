@@ -19,10 +19,12 @@ def bfs(i, j, visited):
             nx = x + dx[d]
             ny = y + dy[d]
 ​
-            if 0 <= nx < N and 0 <= ny < N:
-                if arr[nx][ny] > h and not visited[nx][ny]:
-                    q.append((nx, ny))
-                    visited[nx][ny] = True
+            if not (0 <= nx < N and 0 <= ny < N):
+                continue
+            
+            if arr[nx][ny] > h and not visited[nx][ny]:
+                q.append((nx, ny))
+                visited[nx][ny] = True
 ​
 ​
 # 비의 양에 따라 물에 잠기지 않는 안전한 영역의 개수 중 최대인 경우를 출력
