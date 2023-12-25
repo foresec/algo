@@ -11,7 +11,7 @@ function solution(n)
             n -= 1
             ans += 1
         } else {
-            n = n / 2
+            n /= 2
         }
     }
 
