@@ -7,11 +7,11 @@ def solution(n, words):
         
         
         # 한 글자인 단어일 때
-        if len(words[i-1]) == 1:
-            e = i % n
-            f = i // n
-            answer = [e+1, f+1]
-            break
+#         if len(words[i-1]) == 1:
+#             e = i % n
+#             f = i // n
+#             answer = [e+1, f+1]
+#             break
             
                
         # 끝말잇기가 성립이 안될때
