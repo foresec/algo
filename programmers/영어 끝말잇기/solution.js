@@ -28,16 +28,6 @@
 // }
 
 
-
-2
-3
-4
-5
-6
-7
-8
-9
-10
 function solution(n, words) {
     let answer = 0;
     words.reduce((prev, now, idx) => {
