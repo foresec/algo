@@ -18,8 +18,7 @@ def solution(n,a,b):
             b += 1
         else:
             b //= 2
-  
+        
         answer += 1
         
-
     return answer
