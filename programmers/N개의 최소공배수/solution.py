@@ -5,15 +5,16 @@ def solution(arr):
     
     now = 2
     
-    idx = 5
     while True:
         
+        cnt = 0
         for num in arr:
             if num == 1:
-                arr.remove(num)
-                
-        if len(arr) == 0:
+                cnt += 1
+        
+        if cnt == len(arr):
             break
+
             
         check = False
         for i in range(len(arr)):
