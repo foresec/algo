@@ -1,9 +1,24 @@
 // [문제 링크]: https://school.programmers.co.kr/learn/courses/30/lessons/12953?language=python3#
 
+def get_prime(n):
+    temp = [False, False] + [True] * (n-1)
+    primes = []
+    
+    for i in range(2, n+1):
+        if temp[i]:
+            primes.append(i)
+            for j in range(2 * i, n+1, i):
+                temp[j] = False
+    return primes
+    
+
 def solution(arr):
     answer = 1
     
-    now = 2
+    
+    prime = get_prime(max(arr))
+    print(prime)
+    idx = 0
     
     while True:
         
@@ -18,14 +33,14 @@ def solution(arr):
             
         check = False
         for i in range(len(arr)):
-            if arr[i] % now == 0:
-                arr[i] = arr[i] // now
+            if arr[i] % prime[idx] == 0:
+                arr[i] = arr[i] // prime[idx]
                 check = True
         
         if check:
-            answer *= now
+            answer *= prime[idx]
         else:
-            now += 1
+            idx += 1
             
     
     return answer
