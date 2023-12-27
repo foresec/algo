@@ -49,47 +49,18 @@
 #     return answer
 
 
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
 def solution(arr):
     answer = 1
-
     now = 2
 
-    idx = 5
     while True:
-
+        
+        cnt = 0
         for num in arr:
             if num == 1:
-                arr.remove(num)
+                cnt += 1
 
-        if len(arr) == 0:
+        if cnt == len(arr):
             break
 
         check = False
