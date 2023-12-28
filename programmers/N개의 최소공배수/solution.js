@@ -4,7 +4,8 @@ function solution(arr) {
     let answer = 1;
     let now = 2
     
-    while (now <= Math.max(...arr)) {
+    // while (now <= Math.max(...arr)) {
+    while (true) {
         
         // 나누기
         let check = false
@@ -22,9 +23,9 @@ function solution(arr) {
         }
         
         // 모든 arr의 요소들이 1이면
-        // if (arr.every((num => num === 1))) {
-        //     break;
-        // }
+        if (arr.every((num => num === 1))) {
+            break;
+        }
         
     }
     
