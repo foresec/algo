@@ -38,7 +38,7 @@ const N = parseInt(input[0]);
 const arr = input.slice(1).map(line => line.split(' ').map(Number));
 ​
 let ans = 1
-let max_h = Math.max(...arr.map(row => Math.max(...row))) - 1
+let max_h = Math.max(...arr.flat())
 ​
 for (let h = 1; h <= max_h; h++) {
     let cnt = 0
