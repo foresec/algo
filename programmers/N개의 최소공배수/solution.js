@@ -5,21 +5,9 @@ function solution(arr) {
     let now = 2
     while (true) {
         
-        let cnt = 0
-        for (num of arr) {
-            // 전부 1이라면
-            if (num === 1){
-                cnt += 1
-            }
-        }
-        
-        if (cnt === arr.length) {
-            break
-        }
-        
         // 나누기
         let check = false
-        for (let i=0;i<arr.length;i++) {
+        for (let i=0; i < arr.length; i++) {
             if(arr[i] % now === 0) {
                 arr[i] /= now             
                 check = true
@@ -30,6 +18,11 @@ function solution(arr) {
             now += 1
         } else {
             answer *= now
+        }
+        
+        // 모든 arr의 요소들이 1이면
+        if (arr.every((num => num === 1))) {
+            break;
         }
         
     }
