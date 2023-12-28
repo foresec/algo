@@ -1,4 +1,4 @@
-// [문제 링크]: https://school.programmers.co.kr/learn/courses/30/lessons/12914#
+// [문제 링크]: https://school.programmers.co.kr/learn/courses/30/lessons/12914?language=python3
 
 # 이것도 됨
 # from math import comb
@@ -11,6 +11,8 @@
         
 #     return answer % 1234567
 
+
+# 적어보면 피보나치 형식으로 수가 늘어남
 def solution(n):
     if n <= 2:
         return n
