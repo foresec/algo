@@ -1,4 +1,4 @@
-// [문제 링크]: https://school.programmers.co.kr/learn/courses/30/lessons/138476?language=javascript
+// [문제 링크]: https://school.programmers.co.kr/learn/courses/30/lessons/138476
 
 function solution(k, tangerine) {
     let answer = 0;
@@ -9,14 +9,12 @@ function solution(k, tangerine) {
         count.set(t, (count.get(t) ?? 0) + 1)
     }
     
-    
     // value값대로 정렬한 리스트 반환
-    let sortedCount = [...count.entries()].sort((a,b)=> b[1]- a[1])
-    
+    let sortedCount = Array.from(count.values()).sort((a,b)=> b - a)
     
     let temp = 0
     for (let num of sortedCount) {
-        temp += num[1]
+        temp += num
         answer++
         
         if (temp >= k) {
