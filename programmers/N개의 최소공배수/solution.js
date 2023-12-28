@@ -34,13 +34,12 @@
 // 유클리드 호제법 사용
 // 최대 공약수(작은 수로 나눠서 나머지가 0이 될때의 b의 값)
 const gcd = (a, b) => {
-    console.log(a, b)
+    
     // 종료 조건
     if (a % b === 0) {
         return b;
     }
     
-    // 재귀적인 적용
     return gcd(b, a % b);
 };
 
