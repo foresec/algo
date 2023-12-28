@@ -10,7 +10,7 @@ function solution(k, tangerine) {
     }
     
     // value값대로 정렬한 리스트 반환
-    let sortedCount = Array.from(count.values()).sort((a,b)=> b - a)
+    let sortedCount = [...count.values()].sort((a,b)=> b - a)
     
     let temp = 0
     for (let num of sortedCount) {
