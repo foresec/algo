@@ -47,10 +47,7 @@ const gcd = (a, b) => {
 
 
 // 최소 공배수(두수의 곱/ 두수의 최대공약수)
-const lcm = (a, b) => {
-    return (a * b) / gcd(a, b)
-    
-    };
+const lcm = (a, b) => (a * b) / gcd(a, b)
 
 function solution(arr) {
     let answer = arr[0];
