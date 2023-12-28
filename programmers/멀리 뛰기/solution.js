@@ -35,7 +35,7 @@ function solution(n) {
         dp[i] = (dp[i - 1] + dp[i - 2]) ; // 나머지 연산 중에도 BigInt 사용
     }
 
-    return Number(dp[n] % 1234567n); // BigInt를 다시 일반적인 Number로 변환
+    return dp[n] % 1234567n; // BigInt를 다시 일반적인 Number로 변환
 }
 
 console.log(solution(1000)); // 예상 결과: 662387
