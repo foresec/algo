@@ -31,16 +31,18 @@
 // }
 
 
+
+
 // 유클리드 호제법 사용
 // 최대 공약수(작은 수로 나눠서 나머지가 0이 될때의 b의 값)
 const gcd = (a, b) => {
-    
+    let temp = a % b
     // 종료 조건
-    if (a % b === 0) {
+    if (temp === 0) {
         return b;
     }
     
-    return gcd(b, a % b);
+    return gcd(b, temp);
 };
 
 
@@ -49,11 +51,12 @@ const lcm = (a, b) => {
     return (a * b) / gcd(a, b)
     
     };
-function solution(arr) {
-    let answer = 1;
 
-    for (let num of arr) {
-        answer = lcm(answer, num);
+function solution(arr) {
+    let answer = arr[0];
+
+    for (let i = 1; i < arr.length; i++) {
+        answer = lcm(arr[i], answer);
     }
 
     return answer;
