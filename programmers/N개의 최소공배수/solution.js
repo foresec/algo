@@ -49,12 +49,11 @@ const lcm = (a, b) => {
     return (a * b) / gcd(a, b)
     
     };
-
 function solution(arr) {
-    let answer = arr[0];
+    let answer = 1;
 
-    for (let i = 1; i < arr.length; i++) {
-        answer = lcm(arr[i], answer);
+    for (let num of arr) {
+        answer = lcm(answer, num);
     }
 
     return answer;
