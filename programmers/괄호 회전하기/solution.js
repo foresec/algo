@@ -21,8 +21,8 @@ function solution(s) {
         
         
         let stack = []
-        for (let j = 0; j < len_s; j++) {
-            let temp = s[(i+j) % len_s]
+        for (let j = i; j < len_s + i; j++) {
+            let temp = s[ j % len_s]
             
             // stack이 없을 경우 추가하고 push 후 continue
             if (!stack.length) {
@@ -30,7 +30,7 @@ function solution(s) {
                 continue
             }
         
-            // 해당 괄호가 존재하고 짝이 맞추         
+            // stack과비교해서 해당 괄호의 짝이 맞춰지면 pop, 아니면 push  
             if (complete.get(stack[stack.length-1]) === temp) {
                 stack.pop()
             } else {
@@ -39,7 +39,8 @@ function solution(s) {
     
             
         }
-         
+        
+        // stack에 남아있는게 없다면 횟수 카운트 
         if (!stack.length) {
             answer++
         }
