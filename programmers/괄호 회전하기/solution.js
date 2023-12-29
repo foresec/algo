@@ -15,9 +15,9 @@ function solution(s) {
     for (let i=0; i < len_s; i++) {
         
         // (추가적으로) 처음부터 닫혀있을 경우 성립할 수 없으니 continue 
-        if ( ["]", "}", ")"].includes(s[i]) ) {
-            continue
-        }
+        // if ( ["]", "}", ")"].includes(s[i]) ) {
+        //     continue
+        // }
         
         
         let stack = []
