@@ -5,9 +5,11 @@ def solution(s):
     len_s = len(s)
     complete = {"(": ")", "{":"}", "[":"]"}
     
-    for i in range(len_s):        
-        # if s[i] in ["]", "}", ")"]:
-        #     continue
+    for i in range(len_s):  
+        
+        # 처음부터 닫혀있으면 어차피 될수가 없으므로
+        if s[i] in ["]", "}", ")"]:
+            continue
             
         stack = []
         for j in range(len_s):
