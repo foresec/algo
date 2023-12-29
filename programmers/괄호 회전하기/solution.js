@@ -24,11 +24,12 @@ function solution(s) {
         for (let j = 0; j < len_s; j++) {
             let temp = s[(i+j) % len_s]
             
-            // stack이 없을 경우 추가하고 push 후 continue
+            // stack이 없을 경우 추가하고 push 및 continue
             if (!stack.length) {
                 stack.push(temp)
                 continue
             }
+
         
             // stack과비교해서 해당 괄호의 짝이 맞춰지면 pop, 아니면 push  
             if (complete.get(stack[stack.length-1]) === temp) {
@@ -36,7 +37,6 @@ function solution(s) {
             } else {
                 stack.push(temp)
             }
-    
             
         }
         
