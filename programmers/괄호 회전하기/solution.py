@@ -3,6 +3,7 @@
 def solution(s):
     answer = 0
     len_s = len(s)
+    complete = {"(": ")", "{":"}", "[":"]"}
     
     for i in range(len_s):        
         if s[i] in ["]", "}", ")"]:
@@ -18,7 +19,7 @@ def solution(s):
                 stack.append(temp)
                 continue
                 
-            if (stack[-1] == "(" and temp == ")" ) or (stack[-1] == "{" and temp == "}") or (stack[-1] == "[" and temp == "]"):
+            if stack[-1] in complete and complete[stack[-1]] == temp:
                 stack.pop()
             else:
                 stack.append(temp)   
