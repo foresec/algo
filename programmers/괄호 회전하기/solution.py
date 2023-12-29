@@ -4,11 +4,15 @@ def solution(s):
     answer = 0
     len_s = len(s)
     
-    for i in range(len_s):
+    for i in range(len_s):        
+        if s[i] in ["]", "}", ")"]:
+            continue
+            
         stack = []
         for j in range(len_s):
             temp = s[(i+j) % len_s]
             
+
             
             if not stack:
                 stack.append(temp)
