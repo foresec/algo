@@ -14,9 +14,9 @@ function solution(s) {
     
     for (let i=0; i < len_s; i++) {
         
-        if ( ["]", "}", ")"].includes(s[i]) ) {
-            continue
-        }
+        // if ( ["]", "}", ")"].includes(s[i]) ) {
+        //     continue
+        // }
         
         
         let stack = []
