@@ -6,8 +6,8 @@ def solution(s):
     complete = {"(": ")", "{":"}", "[":"]"}
     
     for i in range(len_s):        
-        if s[i] in ["]", "}", ")"]:
-            continue
+        # if s[i] in ["]", "}", ")"]:
+        #     continue
             
         stack = []
         for j in range(len_s):
