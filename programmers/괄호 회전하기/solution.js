@@ -14,12 +14,17 @@ function solution(s) {
     
     for (let i=0; i < len_s; i++) {
         
+        if ( ["]", "}", ")"].includes(s[i]) ) {
+            continue
+        }
+        
+        
         let stack = []
         for (let j = 0; j < len_s; j++) {
             let temp = s[(i+j) % len_s]
             
 
-            if (stack.length === 0) {
+            if (!stack.length) {
                 stack.push(temp)
                 continue
             }
@@ -34,7 +39,7 @@ function solution(s) {
             
         }
          
-        if (stack.length === 0) {
+        if (!stack.length) {
             answer++
         }
         
