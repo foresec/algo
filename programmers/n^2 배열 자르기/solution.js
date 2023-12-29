@@ -16,19 +16,36 @@
 //     return answer;
 // }
 
-// 아직 이해안된 코드
+
+// function solution(n, left, right) {
+//     const answer = []
+//     // 한줄로 다 넣기
+//     for (let i = left; i <= right; i++) {
+//         const row = Math.floor(i / n)
+//         const col = i % n;
+//         const value = Math.max(row+1, col+1);
+//         answer.push(value);
+//     }
+//     return answer;
+// }
+
+
 function solution(n, left, right) {
-    const answer = []
+    const size = right - left + 1
+    const answer = Array(size).fill(0)
+
     // 한줄로 다 넣기
-    for (let i = left; i <= right; i++) {
-        const row = Math.floor(i / n)
-        const col = i % n;
-        
-        const value = Math.max(row+1, col+1);
-        answer.push(value);
+    for (i=0;i<size;i++) {
+        let temp = left + i
+        const row = Math.floor(temp / n)
+        const col = temp % n
+        const val = Math.max(row, col) + 1
+        answer[i] = val        
     }
+
     return answer;
 }
+
 
 
 
