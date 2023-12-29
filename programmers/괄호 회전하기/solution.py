@@ -6,8 +6,8 @@ def solution(s):
     
     for i in range(len_s):
         stack = []
-        for j in range(i,len_s + i):
-            temp = s[j % len_s]
+        for j in range(len_s):
+            temp = s[(i+j) % len_s]
             
             
             if not stack:
