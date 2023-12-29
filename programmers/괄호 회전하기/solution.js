@@ -21,8 +21,8 @@ function solution(s) {
         
         
         let stack = []
-        for (let j = i; j < len_s + i; j++) {
-            let temp = s[ j % len_s]
+        for (let j = 0; j < len_s; j++) {
+            let temp = s[(i+j) % len_s]
             
             // stack이 없을 경우 추가하고 push 후 continue
             if (!stack.length) {
