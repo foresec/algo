@@ -8,10 +8,16 @@ def solution(s):
         stack = []
         for j in range(i,len_s + i):
             temp = s[j % len_s]
-            if stack and ((stack[-1] == "(" and temp == ")" ) or (stack[-1] == "{" and temp == "}") or (stack[-1] == "[" and temp == "]")):
+            
+            if not stack:
+                stack.append(temp)
+                continue
+                
+            if (stack[-1] == "(" and temp == ")" ) or (stack[-1] == "{" and temp == "}") or (stack[-1] == "[" and temp == "]"):
                 stack.pop()
             else:
-                stack.append(temp)          
+                stack.append(temp)   
+                
         if not stack:
             answer += 1
                                
