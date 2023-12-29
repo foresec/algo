@@ -9,6 +9,7 @@ def solution(s):
         for j in range(i,len_s + i):
             temp = s[j % len_s]
             
+            
             if not stack:
                 stack.append(temp)
                 continue
