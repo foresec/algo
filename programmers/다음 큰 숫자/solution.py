@@ -48,10 +48,13 @@ def solution(n):
     answer = 0
     # 이진수로 변환
     bin_num = bin(n)[2:]
+    
+    # 1의갯수
+    one_cnt = bin_num.count('1')
 
     # 다음 큰 숫자 
     for i in range(n+1, 1000001):
-        if bin(i)[2:].count('1') == bin_num.count('1'):
+        if bin(i)[2:].count('1') == one_cnt:
             answer = i
             break
             
