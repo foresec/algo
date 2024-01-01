@@ -42,7 +42,6 @@ function solution(n, left, right) {
         const val = Math.max(row, col) + 1
         answer[i] = val        
     }
-    console.log(answer.slice(2,2))
 
     return answer;
 }
