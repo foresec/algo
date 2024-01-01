@@ -11,7 +11,7 @@ def solution(citations):
         
         if citations[h_idx - 1] >= h_idx:
             answer = h_idx
-            print(answer)
+
         else:
             break
 
