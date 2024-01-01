@@ -32,11 +32,12 @@
 def solution(citations):
     answer = 0
     len_c = len(citations)
+    
     citations.sort(reverse=True)
 
-    for h_index in range(1, len_c + 1):
-        if citations[h_index - 1] >= h_index:
-            answer = h_index
+    for h_idx in range(1, len_c + 1):
+        if citations[h_idx - 1] >= h_idx:
+            answer = h_idx
         else:
             break
 
