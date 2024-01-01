@@ -5,7 +5,6 @@
 
 def solution(want, number, discount):
     answer = 0
-    total = sum(number)
     
     food_dict = dict(zip(want, number))
     
