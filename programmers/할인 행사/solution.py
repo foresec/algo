@@ -9,7 +9,7 @@ def solution(want, number, discount):
     
     food_dict = dict(zip(want, number))
     
-    for i in range(len(discount)):
+    for i in range(len(discount) - 9):
         temp = discount[i:i+10]
         cnt = 0
         
