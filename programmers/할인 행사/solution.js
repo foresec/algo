@@ -38,7 +38,7 @@ function solution(want, number, discount) {
         discountMap.set(discount[i], discountMap.get(discount[i]) + 1 || 1);
         
         if (i < 9) continue;
-        
+        // 
         discountMap.set(discount[i - 10], discountMap.get(discount[i - 10]) - 1);
         
         for (let i = 0; i < want.length; i += 1) {
