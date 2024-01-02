@@ -1,7 +1,7 @@
 // [문제 링크]: https://school.programmers.co.kr/learn/courses/30/lessons/12949?language=javascript
 
-// // 1
-// // 2번이 더 빠른경우도 있긴한데 거의 1번풀이가 더 빠른듯
+// 1
+// 2번이 더 빠른경우도 있긴한데 거의 1번풀이가 더 빠른듯
 
 // function solution(arr1, arr2) {
         
@@ -25,7 +25,7 @@
 
 
 
-2
+// 2
 function solution(arr1, arr2) {
     return arr1.map((row) => arr2[0].map((x,y) => row.reduce((a,b,c) => a + b * arr2[c][y], 0)))
 }
