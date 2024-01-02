@@ -28,7 +28,7 @@ function solution(citations) {
     let end = citations.length;
     let answer = 0;
     
-    citations.sort((a, b)=> b-a)
+    // citations.sort((a, b)=> b-a)
     while (start <= end) {
         const mid = parseInt((start + end) / 2);
         const count = citations.filter(v => v >= mid).length;
