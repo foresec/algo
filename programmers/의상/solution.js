@@ -1,5 +1,6 @@
 // [문제 링크]: https://school.programmers.co.kr/learn/courses/30/lessons/42578?language=javascript
 
+// 밑 코드보다 이게 더 빠름
 function solution(clothes) {
     let answer = 0;
     let cloMap = new Map()
@@ -22,9 +23,6 @@ function solution(clothes) {
     
     // 마지막으로 하나도 입지 않는 경우 1가지를 뺌
     answer += (cnt - 1)
-    
-    
-
     
     return answer;
 }
