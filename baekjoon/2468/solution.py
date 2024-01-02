@@ -33,11 +33,10 @@ arr = [list(map(int, input().split())) for _ in range(N)]
 ​
 ​
 # 최대 높이를 구해서
-# max_h = 0
-# for a in arr:
-#     if max(a) > max_h:
-#         max_h = max(a)
-max_h = max(max(a) for a in arr)
+max_h = 0
+for a in arr:
+    if max(a) > max_h:
+        max_h = max(a)
 ​
 ​
 ans = 1
@@ -53,11 +52,9 @@ for h in range(1, max_h):
                 visited[i][j] = True
                 # 잠기지 않는 구역을 탐색 후 전부 잠긴 구역으로 바꾸기(탐색되지 않도록)
                 bfs(i, j, visited)
-                
                 cnt += 1
 ​
     ans = max(cnt, ans)
 ​
 ​
 print(ans)
-​
