@@ -1,7 +1,7 @@
 // [문제 링크]: https://school.programmers.co.kr/learn/courses/30/lessons/12949?language=javascript
 
 // 1
-// 2번이 더 빠른경우도 있긴한데 거의 1번풀이가 더 빠른듯
+// 1,2의 속도차이가 막 두드러지게 나진 않음
 
 // function solution(arr1, arr2) {
         
