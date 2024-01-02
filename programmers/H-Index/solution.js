@@ -15,10 +15,30 @@
 // }
 
 
+// function solution(citations) {
+//     citations.sort((a, b) => b - a);
+
+//     const answer = citations.filter((citation, index) => citation >= index + 1).length;
+
+//     return answer;
+// }
+
 function solution(citations) {
-    citations.sort((a, b) => b - a);
+    let start = 0;
+    let end = citations.length;
+    let answer = 0;
+    
+    while (start <= end) {
+        const mid = parseInt((start + end) / 2);
+        const count = citations.filter(v => v >= mid).length;
 
-    const answer = citations.filter((citation, index) => citation >= index + 1).length;
-
+        if (count >= mid) {
+            answer = mid;
+            start = mid + 1;
+        } else {
+            end = mid - 1;
+        }
+    }
+    
     return answer;
 }
