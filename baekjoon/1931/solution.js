@@ -3,7 +3,7 @@
 // 사용할 수 있는 회의의 최대 개수
 const fs = require("fs");
 const filePath = process.platform === "linux" ? "/dev/stdin" : "./1931.txt";
-let input = fs.readFileSync(filePath).toString().split("\n");
+let input = fs.readFileSync(filePath).toString().trim().split("\n")
 ​
 // let input = fs.readFileSync(filePath).toString().trim().split("\n")
 ​
