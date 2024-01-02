@@ -11,9 +11,12 @@ const arr = input.slice(1).map((line) => line.split(" ").map(Number));
 ​
 // 왜 얘는 되고
 arr.sort((a, b) => {
-  return a[1] - b[1] || a[0] - b[0];
+  if (a[1] !== b[1]) {
+    return a[1] - b[1];
+  } else {
+    return a[0] - b[0];
+  }
 });
-​
 let cnt = 1;
 let now = arr[0][1];
 ​
