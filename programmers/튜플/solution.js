@@ -3,6 +3,7 @@
 function solution(s) {
     let answer = [];
     
+    // 리스트 형태로 split하기
     lenS = s.length
     let newS = s.substring(2, lenS-2).split("},{")
     
@@ -12,10 +13,15 @@ function solution(s) {
         tuples.push(temp)
     }
     
+    // 정렬하기
     tuples.sort((a, b) => a.length - b.length)
     
+    
+    
+    // 순서대로 push하기
     answer.push(tuples[0][0])
     
+    // 연속된 두 배열을 비교해서 없는 수를 순차적으로 push해줌
     for (let i=1; i < tuples.length; i++) {
         
         // diff를 찾는데 이방법도 되지만 includes때문에 밑 방법보다 느림
@@ -23,10 +29,6 @@ function solution(s) {
         
         tempSet = new Set (tuples[i-1])
         let diff = tuples[i].filter(item=> !tempSet.has(item))
-        
-        // let tempSet = new Set(tuples[i - 1]);
-        // let diff = tuples[i].filter(item => tempSet.delete(item));
-
         
         answer.push(diff[0])
     }
