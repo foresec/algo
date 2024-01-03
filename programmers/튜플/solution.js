@@ -5,18 +5,11 @@ function solution(s) {
     
     // 리스트 형태로 split하기
     lenS = s.length
-    let newS = s.substring(2, lenS-2).split("},{")
+    let tuples = s.substring(2, lenS-2).split("},{").map(item=> item.split(",").map(Number))
     
-    tuples = []
-    for (t of newS) {
-        let temp = t.split(",").map(Number)
-        tuples.push(temp)
-    }
     
     // 정렬하기
     tuples.sort((a, b) => a.length - b.length)
-    
-    
     
     // 순서대로 push하기
     answer.push(tuples[0][0])
@@ -32,12 +25,6 @@ function solution(s) {
         
         answer.push(diff[0])
     }
-
-    let inputString = "{{2},{2,1},{2,1,3},{2,1,3,4}}";
-
-    // 정규식을 사용하여 숫자만 추출
-    let numbers = inputString.match(/\d+/g);
-    console.log(numbers)
     
     return answer;
 }
