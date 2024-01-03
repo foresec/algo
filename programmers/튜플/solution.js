@@ -1,4 +1,4 @@
-// [문제 링크]: https://school.programmers.co.kr/learn/courses/30/lessons/64065?language=javascript
+// [문제 링크]: https://school.programmers.co.kr/learn/courses/30/lessons/64065
 
 function solution(s) {
     let answer = [];
@@ -32,6 +32,12 @@ function solution(s) {
         
         answer.push(diff[0])
     }
+
+    let inputString = "{{2},{2,1},{2,1,3},{2,1,3,4}}";
+
+    // 정규식을 사용하여 숫자만 추출
+    let numbers = inputString.match(/\d+/g);
+    console.log(numbers)
     
     return answer;
 }
