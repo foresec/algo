@@ -17,10 +17,10 @@ function solution(s) {
     answer.push(tuples[0][0])
     
     for (let i=1; i < tuples.length; i++) {
-        // let diff = tuples[i].filter(item => !tuples[i-1].includes(item))
+        let diff = tuples[i].filter(item => !tuples[i-1].includes(item))
         
-        tempSet = new Set (tuples[i-1])
-        let diff = tuples[i].filter(item=> !tempSet.has(item))
+        // tempSet = new Set (tuples[i-1])
+        // let diff = tuples[i].filter(item=> !tempSet.has(item))
         
         answer.push(diff[0])
     }
