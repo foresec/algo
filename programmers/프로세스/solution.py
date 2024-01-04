@@ -2,30 +2,30 @@
 
 # # location(idx)에 해당되는 프로세스가 몇번째로 실행되는지
 
-from collections import deque
+# from collections import deque
 
-def solution(priorities, location):
+# def solution(priorities, location):
     
-    answer = 0   
-    q = deque(enumerate(priorities))
+#     answer = 0   
+#     q = deque(enumerate(priorities))
 
-    while q:
-        temp = q.popleft()
-        if q:
-            max_val = max(q, key=lambda x: x[1])
+#     while q:
+#         temp = q.popleft()
+#         if q:
+#             max_val = max(q, key=lambda x: x[1])
         
-        # 우선순위가 아닐때
-        if max_val[1] > temp[1]:
-            q.append(temp)
+#         # 우선순위가 아닐때
+#         if max_val[1] > temp[1]:
+#             q.append(temp)
             
-        # 우선순위가 됐을 때
-        else:
-            # 프로세스 실행 카운트
-            answer += 1
-            if temp[0] == location:
-                break
+#         # 우선순위가 됐을 때
+#         else:
+#             # 프로세스 실행 카운트
+#             answer += 1
+#             if temp[0] == location:
+#                 break
     
-    return answer
+#     return answer
 
 
 
@@ -44,3 +44,40 @@ def solution(priorities, location):
 #     return answer
 
 
+
+
+
+
+
+
+
+
+# 우선 순위대로 실행
+# 실행되면 그냥 빠지고
+# 실행 안되면 뒤에 새로 넣음
+
+# location에 해당하는 프로세스는 몇번째로 실행되는가
+from collections import deque
+def solution(priorities, location):
+    
+    answer = 0   
+    q = deque(enumerate(priorities))
+    print(q)
+    while q:
+        temp = q.popleft()
+        
+        if q:
+            max_val = max(q, key=lambda x: x[1])
+        
+        # 우선순위가 아닐때
+        if max_val[1] > temp[1]:
+            q.append(temp)
+            
+        # 우선순위가 됐을 때
+        else:
+            # 프로세스 실행 카운트
+            answer += 1
+            if temp[0] == location:
+                break
+        
+    return answer
