@@ -7,18 +7,13 @@ function solution(progresses, speeds) {
     
     let stack = []
     
-    while (compare.length > 0) {
-        
-        if (stack.length > 0 && Math.max(...stack) < compare[0]) {
-                        
-            answer.push(stack.length)
-            stack = []            
-            
-        } else {
-            stack.push(compare.shift())
-            
+    for (const current of compare) {
+        if (stack.length > 0 && Math.max(...stack) < current) {
+            answer.push(stack.length);
+            stack = [];
         }
-            
+        
+        stack.push(current);
     }
     
     if (stack.length > 0) {
