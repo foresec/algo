@@ -62,7 +62,6 @@ def solution(priorities, location):
     
     answer = 0   
     q = deque(enumerate(priorities))
-    print(q)
     while q:
         temp = q.popleft()
         
