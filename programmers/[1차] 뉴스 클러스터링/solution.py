@@ -1,5 +1,6 @@
 // [문제 링크]: https://school.programmers.co.kr/learn/courses/30/lessons/17677?language=python3
 
+# 틀린코드
 # def solution(str1, str2):
 #     answer = 0
 #     dict_str1 = {}
@@ -41,6 +42,8 @@
         
 #     return answer
 
+
+# 참고코드
 from collections import Counter
 
 def solution(str1, str2):
