@@ -5,18 +5,13 @@ def solution(n, k):
     
     num = ''
     while n > 0:
-        if n % k == 0:
-            n //= k
-            num = "0" + num
-        else:          
-            temp = n % k
-            n //= k
-            num = str(temp) + num
+        temp = n % k
+        n //= k
+        num = str(temp) + num
     
     num_list = list(num.split("0"))
     
     def isPrime(a):
-        
         if (a < 2):
             return False
         for i in range(2, int(a**0.5)+1):
