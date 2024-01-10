@@ -14,12 +14,12 @@ def solution(n, k):
     
     num = ''
     while n > 0:
-        # temp = n % k
-        # n //= k
-        # num = str(temp) + num
-        num += str(n % k)
+        temp = n % k
         n //= k
-    num = num[::-1] 
+        num = str(temp) + num
+    #     num += str(n % k)
+    #     n //= k
+    # num = num[::-1] 
     
     num_list = list(num.split("0"))
 
