@@ -11,6 +11,8 @@ def solution(n, k):
         num += str(n % k)
         n //= k
     num = num[::-1] 
+    
+    
     num_list = list(num.split("0"))
     
     def isPrime(a):
