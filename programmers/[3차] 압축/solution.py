@@ -2,12 +2,14 @@
 
 def solution(msg):
     answer = []
-    # str_dict = {}
+    # 1. chr, ord로 딕셔너리 만들기(미묘하게 조금 더 빠른듯?)
+    str_dict = {}
+    for i in range(26):
+        alpha = chr(ord('A') + i)
+        str_dict[alpha] = i + 1
     
-    # for i in range(26):
-    #     alpha = chr(ord('A') + i)
-    #     str_dict[alpha] = i + 1
-    str_dict = dict(zip("ABCDEFGHIJKLMNOPQRSTUVWXYZ", range(1,27)))
+    # 2. zip함수를 이용해서 딕셔너리만들기 
+    # str_dict = dict(zip("ABCDEFGHIJKLMNOPQRSTUVWXYZ", range(1,27)))
         
     n = 26    
     i = 0
