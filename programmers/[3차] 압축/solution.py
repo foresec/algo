@@ -2,12 +2,12 @@
 
 def solution(msg):
     answer = []
-    str_dict = {}
+    # str_dict = {}
     
-    for i in range(26):
-        alpha = chr(ord('A') + i)
-        str_dict[alpha] = i + 1
-    # str_dict = dict(zip("ABCDEFGHIJKLMNOPQRSTUVWXYZ", range(1,27)))
+    # for i in range(26):
+    #     alpha = chr(ord('A') + i)
+    #     str_dict[alpha] = i + 1
+    str_dict = dict(zip("ABCDEFGHIJKLMNOPQRSTUVWXYZ", range(1,27)))
         
     n = 26    
     i = 0
