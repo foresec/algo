@@ -1,0 +1,11 @@
+// [문제 링크]: https://school.programmers.co.kr/learn/courses/30/lessons/164668
+
+-- 완료된 중고거래의 총금액이 70만원 이상인 사람
+-- ID, 닉네임, 총거래금액
+SELECT U.USER_ID, U.NICKNAME, SUM(B.PRICE) AS TOTAL_SALES
+FROM USED_GOODS_BOARD B
+JOIN USED_GOODS_USER U ON U.USER_ID = B.WRITER_ID 
+WHERE B.STATUS = "DONE"
+GROUP BY U.USER_ID, U.NICKNAME
+HAVING TOTAL_SALES >= 700000
+ORDER BY TOTAL_SALES
