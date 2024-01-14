@@ -12,6 +12,8 @@ def solution(n, t, m, p):
     answer = "0"
     num_dict = {10: "A", 11: "B", 12: "C", 13: "D", 14: "E", 15: "F"}
     
+    
+    # range 정의 : 미리구할 숫자 갯수 * 게임 참여인원수
     for num in range(t * m):
         temp = ""
         # 진수 더하기
@@ -28,9 +30,9 @@ def solution(n, t, m, p):
             
         answer += temp
         
-        # 길이가 미리 구할 숫자 갯수 * 게임 인원 수를 넘게되면 break
-        if len(answer) > t * m:
-            break
+        # # 길이가 미리 구할 숫자 갯수 * 게임 인원 수를 넘게되면 break
+        # if len(answer) > t * m:
+        #     break
             
     final_ans = ""
     # range로 내 순서, 게임 인원 고려
