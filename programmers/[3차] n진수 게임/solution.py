@@ -33,10 +33,12 @@ def solution(n, t, m, p):
         if len(answer) > t * m:
             break
             
-    final_ans = ""
-    # range로 내 순서, 게임 인원 고려
-    for i in range(p-1, len(answer), m):
-        final_ans += str(answer[i])
+            
+    # return 값으로 바로 슬라이싱하며 생략 가능        
+    # final_ans = ""
+    # # range로 내 순서, 게임 인원 고려
+    # for i in range(p-1, len(answer), m):
+    #     final_ans += str(answer[i])
         
     
 
