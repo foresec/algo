@@ -27,7 +27,7 @@ def solution(n, t, m, p):
             
         answer += temp
         
-        if len(answer) > 1000 * m * p:
+        if len(answer) > t * m * p:
             break
             
     temp2 = []
