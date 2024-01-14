@@ -19,13 +19,12 @@ def solution(n, t, m, p):
         # 진수 더하기
         while num > 0:
             na = num % n
-            if na > 0:
-                a = str(na)
-                if na >= 10:
-                    a = str(num_dict[na])          
-                temp = a + temp 
-            else:
-                temp = "0" + temp    
+            a = str(na)
+            
+            if na >= 10:
+                a = str(num_dict[na])  
+                
+            temp = a + temp 
             num //= n
             
         answer += temp
