@@ -27,14 +27,14 @@ def solution(n, t, m, p):
             
         answer += temp
         
-        if len(answer) > t * m * p:
+        if len(answer) > t * m:
             break
-            
+    print(answer)        
     temp2 = []
     # range로 내 순서, 게임 인원 고려
     for i in range(p-1, len(answer), m):
         temp2.append(answer[i])
         
     answer = "".join(temp2)
-    # print(answer)
+    print(answer)
     return answer[:t]
