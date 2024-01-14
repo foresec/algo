@@ -12,7 +12,7 @@ def solution(n, t, m, p):
     answer = "0"
     num_dict = {10: "A", 11: "B", 12: "C", 13: "D", 14: "E", 15: "F"}
     
-    for num in range(30000):
+    for num in range(t * m):
         temp = ""
         # 진수 더하기
         while num > 0:
