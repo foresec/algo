@@ -5,6 +5,7 @@
 # p : 튜브 순서
 
 # t : 미리구할 숫자 갯수(길이네..)
+
 def solution(n, t, m, p):
     
     # 맨 처음 0으로 시작
@@ -27,14 +28,13 @@ def solution(n, t, m, p):
             
         answer += temp
         
+        # 길이가 미리 구할 숫자 갯수 * 게임 인원 수를 넘게되면 break
         if len(answer) > t * m:
             break
-    print(answer)        
-    temp2 = []
+            
+    final_ans = ""
     # range로 내 순서, 게임 인원 고려
     for i in range(p-1, len(answer), m):
-        temp2.append(answer[i])
-        
-    answer = "".join(temp2)
-    print(answer)
-    return answer[:t]
+        final_ans += str(answer[i])
+
+    return final_ans[:t]
