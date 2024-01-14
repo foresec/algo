@@ -37,5 +37,7 @@ def solution(n, t, m, p):
     # range로 내 순서, 게임 인원 고려
     for i in range(p-1, len(answer), m):
         final_ans += str(answer[i])
+        
+    
 
-    return final_ans[:t]
+    return answer[p-1 : t * m : m]
