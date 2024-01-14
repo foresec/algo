@@ -30,9 +30,9 @@ def solution(n, t, m, p):
             
         answer += temp
         
-        # # 길이가 미리 구할 숫자 갯수 * 게임 인원 수를 넘게되면 break
-        # if len(answer) > t * m:
-        #     break
+        # 길이가 미리 구할 숫자 갯수 * 게임 인원 수를 넘게되면 break
+        if len(answer) > t * m:
+            break
             
     final_ans = ""
     # range로 내 순서, 게임 인원 고려
