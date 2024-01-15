@@ -39,8 +39,10 @@ def solution(scoville, K):
     answer = 0
     heapq.heapify(scoville)
     
+    
+    # 여기서 최소값이[0]에 있는걸 잘 활용하는게 중요
     while scoville[0] < K:
-        
+        # pop 2번이 일어나기 전에 체크
         if len(scoville) < 2:
             answer = -1
             break
