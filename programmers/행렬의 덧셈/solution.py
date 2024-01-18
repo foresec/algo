@@ -2,7 +2,6 @@
 
 def solution(arr1, arr2):
     
-    
     N = len(arr1)
     M = len(arr1[0])
     answer = [[0] * M for _ in range(N)]
