@@ -6,3 +6,5 @@ def solution(s):
         return -int(s[1:])
     else:
         return int(s)
+    
+    
