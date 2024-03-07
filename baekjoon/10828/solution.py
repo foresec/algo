@@ -31,3 +31,4 @@ for _ in range(N):
         else:
             print(-1)
 ​
+            
