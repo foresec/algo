@@ -67,5 +67,6 @@ for i in range(N):
             c_bfs(i, j)
             cnt2 += 1
             
+            
 print(cnt, cnt2)
 ​
