@@ -60,7 +60,4 @@ for dir, dis in info:
         elif dir == 2 and my_dir == 4:
             ans += ((r - my_dis) + (c - dis))
 ​
-​
-​
-​
 print(ans)
