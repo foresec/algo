@@ -25,7 +25,8 @@ for _ in range(K):
     adj = [[] for _ in range(V + 1)]
     visited = [False] * (V + 1)
     check = [0] * (V + 1)
-    ans = True
+    isGraph = True
+    ans = "YES"
 ​
     for i in range(E):
         s, e = map(int, sys.stdin.readline().split())
@@ -34,14 +35,13 @@ for _ in range(K):
 ​
 ​
     for i in range(1, V+1):
-        if ans:
-            ans = dfs(i, adj, visited, check)
+        if isGraph:
+            isGraph = dfs(i, adj, visited, check)
            
         else:
             # 이분그래프가 아니게 될 경우 반복을 멈춤
             break
     
-    if ans:
-        print("YES")
-    else:
-        print("NO")
+    if not isGraph:
+        ans = "NO"
+    print(ans)
