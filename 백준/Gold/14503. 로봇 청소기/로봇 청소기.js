@@ -1,13 +1,10 @@
 const dx = [-1, 0, 1, 0];
 const dy = [0, 1, 0, -1];
 
-function cleaning(arr, N, M, r, c, d) {
+function cleaning(arr, N, M, x, y, rd) {
   let cnt = 0;
-  let q = [[r, c, d]];
 
-  while (q.length > 0) {
-    let [x, y, rd] = q.shift();
-
+  while (true) {
     if (arr[x][y] === 0) {
       arr[x][y] = 2;
       cnt += 1;
@@ -24,7 +21,8 @@ function cleaning(arr, N, M, r, c, d) {
       if (nx < 0 && ny < 0 && nx >= N && ny >= M) continue;
       // 청소되지 않은 빈 칸이 있는 경우
       if (arr[nx][ny] === 0) {
-        q.push([nx, ny, rd]);
+        x = nx
+				y = ny
         checkZero = true;
         break;
       }
@@ -39,7 +37,8 @@ function cleaning(arr, N, M, r, c, d) {
 
       if (nx >= 0 && ny >= 0 && nx < N && ny < M) {
         if (arr[nx][ny] !== 1) {
-          q.push([nx, ny, rd]);
+          x = nx
+					y = ny
         } else {
           return cnt;
         }
@@ -48,8 +47,6 @@ function cleaning(arr, N, M, r, c, d) {
       }
     }
   }
-
-  return cnt;
 }
 
 // 로봇 청소기가 작동을 시작한 후 작동을 멈출 때까지 청소하는 칸의 개수
