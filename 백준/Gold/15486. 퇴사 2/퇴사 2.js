@@ -8,12 +8,12 @@ function getMaxBenefit(N, arr) {
   for (let i = 0; i < N; i++) {
     let [t, p] = arr[i];
 
+    // 기본적으로 받을 수 있는 최대 수익 매일 업데이트
     dp[i + 1] = Math.max(dp[i + 1], dp[i]);
 
-    if (i + t <= N) {
-      dp[i + t] = Math.max(dp[i] + p, dp[i + t]);
-    }
-		
+    // 퇴사 전 기간 안에서만 profit을 반영한 업데이트
+    if (i + t > N) continue;
+    dp[i + t] = Math.max(dp[i] + p, dp[i + t]);
   }
   return dp[N];
 }
