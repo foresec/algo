@@ -31,7 +31,10 @@ function rotateDownside(minX, R, C, x, y) {
 
 function moveDust(R, C, arr, base) {
   // 작동 시 1칸씩 이동, 공기청정기로 들어간 미세먼지는 정화됨
-  const movedArr = new Array(R).fill(0).map(() => new Array(C).fill(0));
+  let movedArr = new Array(R);
+  for (let i = 0; i < R; i++) {
+    movedArr[i] = new Array(C).fill(0);
+  }
   const [up, down] = base;
 
   // 위쪽(반시계)
@@ -67,7 +70,10 @@ function diffusion(R, C, arr, base) {
   // 5분의 1의 양만큼 4방향으로 확산하며 남은 양은 기존양 - 확산된 양 * 방향갯수
   // (칸 or 공기청정기일 경우 X)
 
-  const diffusedArr = new Array(R).fill(0).map(() => new Array(C).fill(0));
+	let diffusedArr = new Array(R);
+  for (let i = 0; i < R; i++) {
+    diffusedArr[i] = new Array(C).fill(0);
+  }
 
   const [up, down] = base;
 
