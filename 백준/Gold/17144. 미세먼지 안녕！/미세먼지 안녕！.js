@@ -31,10 +31,7 @@ function rotateDownside(minX, R, C, x, y) {
 
 function moveDust(R, C, arr, base) {
   // 작동 시 1칸씩 이동, 공기청정기로 들어간 미세먼지는 정화됨
-  const movedArr = Array.from({ length: R }, () =>
-    Array.from({ length: C }, () => 0)
-  );
-
+  const movedArr = new Array(R).fill(0).map(() => new Array(C).fill(0));
   const [up, down] = base;
 
   // 위쪽(반시계)
@@ -42,6 +39,7 @@ function moveDust(R, C, arr, base) {
     for (let j = 0; j < C; j++) {
       if (arr[i][j] > 0) {
         let [newX, newY] = rotateUpside(up[0], C, i, j);
+        // 공기청정기의 위치와 같으면 제외
         if (newX === up[0] && newY == up[1]) continue;
         movedArr[newX][newY] = arr[i][j];
       }
@@ -52,12 +50,13 @@ function moveDust(R, C, arr, base) {
     for (let j = 0; j < C; j++) {
       if (arr[i][j] > 0) {
         let [newX, newY] = rotateDownside(down[0], R, C, i, j);
+        // 공기청정기의 위치와 같으면 제외
         if (newX === down[0] && newY == down[1]) continue;
         movedArr[newX][newY] = arr[i][j];
       }
     }
   }
-
+  // 공기청정기 위치 표기
   movedArr[up[0]][up[1]] = -1;
   movedArr[down[0]][down[1]] = -1;
 
@@ -68,9 +67,7 @@ function diffusion(R, C, arr, base) {
   // 5분의 1의 양만큼 4방향으로 확산하며 남은 양은 기존양 - 확산된 양 * 방향갯수
   // (칸 or 공기청정기일 경우 X)
 
-  const diffusedArr = Array.from({ length: R }, () =>
-    Array.from({ length: C }, () => 0)
-  );
+  const diffusedArr = new Array(R).fill(0).map(() => new Array(C).fill(0));
 
   const [up, down] = base;
 
@@ -99,7 +96,7 @@ function diffusion(R, C, arr, base) {
       }
     }
   }
-
+  // 공기청정기 위치 표기
   diffusedArr[up[0]][up[1]] = -1;
   diffusedArr[down[0]][down[1]] = -1;
 
@@ -119,20 +116,18 @@ let airCleaner = [];
 for (let i = 1; i <= R; i++) {
   let row = input[i].split(" ").map((val, j) => {
     let num = Number(val);
-    if (num === -1) {
-      airCleaner.push([i - 1, j]);
-    }
+    if (num === -1) airCleaner.push([i - 1, j]);
     return num;
   });
 
   arr.push(row);
 }
 
-let currentArr = arr
+let currentArr = arr;
 
 for (let t = 0; t < T; t++) {
   // 1. 미세먼지 확산(한번에 일어남)
-	currentArr = diffusion(R, C, currentArr, airCleaner);
+  currentArr = diffusion(R, C, currentArr, airCleaner);
   // 2. 공기청정기 이동 및 회수
   currentArr = moveDust(R, C, currentArr, airCleaner);
 }
