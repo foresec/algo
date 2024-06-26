@@ -1,14 +1,14 @@
 const dx = [1, 0, -1, 0];
 const dy = [0, -1, 0, 1];
 
-function rotateUpside(R, C, x, y) {
-  if (x === R && y < C - 1) {
+function rotateUpside(maxX, C, x, y) {
+  if (x === maxX && y < C - 1) {
     y++;
   } else if (x !== 0 && y === C - 1) {
     x--;
   } else if (x === 0 && y > 0) {
     y--;
-  } else if (x < R && y === 0) {
+  } else if (x < maxX && y === 0) {
     x++;
   }
   return [x, y];
@@ -133,15 +133,11 @@ for (let t = 0; t < T; t++) {
   currentArr = moveDust(R, C, currentArr, airCleaner);
 }
 
-let ans = 0;
+let ans = 2;
 for (let i = 0; i < R; i++) {
   for (let j = 0; j < C; j++) {
-    if (currentArr[i][j] > 0) {
-      ans += currentArr[i][j];
-    }
+    ans += currentArr[i][j];
   }
 }
 
 console.log(ans);
-
-
