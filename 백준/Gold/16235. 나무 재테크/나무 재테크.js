@@ -3,37 +3,26 @@ const dy = [0, -1, 0, 1, 1, -1, -1, 1];
 
 // 봄 : 나이만큼 양분을 먹고, 나이가 1 증가
 // 여러개의 나무가 있다면 나이가 어린 나무부터 먹으며, 나이만큼 못먹을시 즉사
-function spring() {
+function springandsummer() {
+  // food
   for (let i = 0; i < N; i++) {
     for (let j = 0; j < N; j++) {
       let temp = tree[i][j];
       temp.sort((a, b) => a - b);
       let alive = [];
-      let dead = [];
+      let deadTree = 0;
+      let leftFood = food[i][j];
       for (let t = 0; t < temp.length; t++) {
         let age = temp[t];
-        if (age <= food[i][j]) {
-          food[i][j] -= age;
+        if (age <= leftFood) {
+          leftFood -= age;
           alive.push(age + 1);
         } else {
-          dead.push(age);
+          deadTree += Math.floor(age / 2);
         }
       }
       tree[i][j] = alive;
-      deadTrees[i][j] = dead;
-    }
-  }
-}
-
-// 여름 : 죽은 나무가 양분(나무의 나이 / 2, 소수점 아래는 버림)이됨
-function summer() {
-  for (let i = 0; i < N; i++) {
-    for (let j = 0; j < N; j++) {
-      for (let t of deadTrees[i][j]) {
-        let val = Math.floor(t / 2);
-        food[i][j] += val;
-      }
-      deadTrees[i][j] = [];
+      food[i][j] = leftFood + deadTree;
     }
   }
 }
@@ -80,9 +69,9 @@ const food = Array.from({ length: N }, () =>
   Array.from({ length: N }, () => 5)
 );
 
-const deadTrees = Array.from({ length: N }, () =>
-  Array.from({ length: N }, () => [])
-);
+// const deadTrees = Array.from({ length: N }, () =>
+//   Array.from({ length: N }, () => [])
+// );
 
 for (let i = 1; i < N + 1; i++) {
   plus.push(input[i].split(" ").map(Number));
@@ -94,8 +83,9 @@ for (let i = 1 + N; i < M + N + 1; i++) {
 }
 
 for (let k = 0; k < K; k++) {
-  spring();
-  summer();
+  // spring();
+  // summer();
+  springandsummer();
   autumn();
   winter();
 }
