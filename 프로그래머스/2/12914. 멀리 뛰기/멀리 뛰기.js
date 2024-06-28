@@ -42,13 +42,12 @@
 
 // 1칸 or 2칸을 뛸 수 있음
 function solution(n) {
-    const dp = Array(n+1).fill(1)
+    const dp = Array(n+1).fill(0)
     dp[1] = 1
-    dp[2] = 1
+    dp[2] = 2
     
-    for (let i = 0;i < n-1; i++){
+    for (let i = 1;i < n; i++){
         dp[i + 2] = (dp[i+1] + dp[i]) % 1234567
-        
     }
     return dp[n]
 }
