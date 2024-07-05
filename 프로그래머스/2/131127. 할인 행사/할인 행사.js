@@ -60,7 +60,6 @@ function solution(want, number, discount) {
     let len = discount.length
 
     let checkMap = new Map(want.map((key, idx) => [key, number[idx]]))
-    console.log(checkMap)
     
     for (let i=0;i <= len-10 ;i++) {
         let temp = discount.slice(i, i + 10)
