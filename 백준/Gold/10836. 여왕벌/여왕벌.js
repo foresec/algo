@@ -9,7 +9,7 @@ function growOnBorder(M, arr, values) {
     let nx = startX - 1;
     let ny = startY;
 
-    if (nx < 0 || nx >= M || ny < 0 || ny >= M) {
+    if (nx < 0) {
       nx = startX;
       ny = startY + 1;
     }
@@ -18,16 +18,6 @@ function growOnBorder(M, arr, values) {
     idx++;
   }
 
-  return arr;
-}
-
-function growAfterBorder(M, arr) {
-  for (let i = 1; i < M; i++) {
-    for (let j = 1; j < M; j++) {
-      let maxVal = Math.max(arr[i - 1][j], arr[i][j - 1], arr[i - 1][j - 1]);
-      arr[i][j] = maxVal;
-    }
-  }
   return arr;
 }
 
@@ -59,12 +49,12 @@ for (let i = 1; i < N + 1; i++) {
     temp[idx++] = 2;
   }
 
-  // 성장1
+  // 성장
   arr = growOnBorder(M, arr, temp);
-  // 성장2
-  arr = growAfterBorder(M, arr);
 }
 
+let initialValues = arr[0].slice(1)
 for (const row of arr) {
-  console.log(...row);
+	let ans = [row[0], ...initialValues]
+	console.log(ans.join(" "))
 }
