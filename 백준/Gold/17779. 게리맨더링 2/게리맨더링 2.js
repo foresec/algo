@@ -6,13 +6,13 @@ function calculate(x, y, d1, d2, total) {
   // 경계선 설정
   // d1
   for (let i = 0; i <= d1; i++) {
-    if (x + i <= N && y - i >= 1) check[x + i][y - i] = 5;
-    if (x + d2 + i <= N && y + d2 - i >= 1) check[x + d2 + i][y + d2 - i] = 5;
+    check[x + i][y - i] = 5;
+    check[x + d2 + i][y + d2 - i] = 5;
   }
   // d2
   for (let i = 0; i <= d2; i++) {
-    if (x + i <= N && y + i <= N) check[x + i][y + i] = 5;
-    if (x + d1 + i <= N && y - d1 + i <= N) check[x + d1 + i][y - d1 + i] = 5;
+		check[x + i][y + i] = 5;
+    check[x + d1 + i][y - d1 + i] = 5;
   }
 
   let areaPeople = [0, 0, 0, 0, total];
