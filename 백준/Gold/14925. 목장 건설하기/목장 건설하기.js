@@ -19,10 +19,7 @@ for (let i = 0; i < M; i++) {
       } else {
         dp[i][j] = Math.min(dp[i][j - 1], dp[i - 1][j], dp[i - 1][j - 1]) + 1;
       }
-    } else {
-      dp[i][j] = 0;
     }
   }
 }
-
 console.log(Math.max(...dp.map((row) => Math.max(...row))));
