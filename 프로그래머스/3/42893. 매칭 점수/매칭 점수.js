@@ -1,24 +1,27 @@
 function extractUrl(page) {
-    const urlPattern = /<meta property="og:url" content="([^"]*)"/;
-    const urlMatch = page.match(urlPattern);
+    
+    // [^"] : "를 제외한 모든 문자
+    // *s는 : 0회이상 반복되는 문자열
+    const pattern = /<meta property="og:url" content="([^"]*)"/;
+    const urlMatch = page.match(pattern);
     return urlMatch ? urlMatch[1] : null;
 }
-
 function extractLinks(page) {
-    const linkPattern = /<a href="([^"]*)"/g;
+    const pattern = /<a href="([^"]*)"/g;
     const links = [];
     let linkMatch;
-    while ((linkMatch = linkPattern.exec(page)) !== null) {
+    while ((linkMatch = pattern.exec(page)) !== null) {
         links.push(linkMatch[1]);
     }
     return links;
 }
 
-function calculateBasicScore(bodyText, wordPattern) {
-    return (bodyText.match(wordPattern) || []).length;
+function calculateBasicScore(bodyText, pattern) {
+    return (bodyText.match(pattern) || []).length;
 }
 
 function calculateLinkScores(pageData, pageLinks) {
+    // Map 내부에서 계산
     for (const [pageUrl, links] of pageLinks.entries()) {
         const currentPageData = pageData.get(pageUrl);
         if (currentPageData && currentPageData.outLinksCount > 0) {
@@ -34,6 +37,7 @@ function calculateLinkScores(pageData, pageLinks) {
 }
 
 function calculateFinalScores(pageData) {
+    // Map 내부에서 계산
     for (const [url, data] of pageData.entries()) {
         data.totalScore += data.basicScore;
     }
@@ -45,6 +49,7 @@ function solution(word, pages) {
     const pageData = new Map();
     const pageLinks = new Map();
     
+    // \b는 단어경계를 나타내서 단어 구분이 가능하게 함
     const wordPattern = new RegExp(`\\b${word}\\b`, 'gi');
     
     for (let i = 0; i < numOfPages; i++) {
@@ -62,7 +67,7 @@ function solution(word, pages) {
             const bodyMatch = page.split('<body>')[1]?.split('</body>')[0];
             
             if (bodyMatch) {
-                // 숫자제거
+                // 숫자와 특수문자 제거
                 const cleanBodyText = bodyMatch.replace(/[^a-zA-Z\s]/g, ' ');
                 const basicScore = calculateBasicScore(cleanBodyText, wordPattern);
                 
@@ -79,7 +84,7 @@ function solution(word, pages) {
     calculateLinkScores(pageData, pageLinks);
     calculateFinalScores(pageData);
     
-    
+    // idx 업데이트
     let maxScore = -Infinity;
     let resultIdx = -1;
     for (const [url, data] of pageData.entries()) {
