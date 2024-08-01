@@ -39,19 +39,6 @@ function calculateFinalScores(pageData) {
     }
 }
 
-function findHighestScoringPage(pageData) {
-    let maxScore = -Infinity;
-    let resultIndex = -1;
-    
-    for (const [url, data] of pageData.entries()) {
-        if (data.totalScore > maxScore || (data.totalScore === maxScore && data.idx < resultIndex)) {
-            maxScore = data.totalScore;
-            resultIndex = data.idx;
-        }
-    }
-    
-    return resultIndex;
-}
 
 function solution(word, pages) {
     const numOfPages = pages.length;
@@ -92,5 +79,16 @@ function solution(word, pages) {
     calculateLinkScores(pageData, pageLinks);
     calculateFinalScores(pageData);
     
-    return findHighestScoringPage(pageData);
+    
+    let maxScore = -Infinity;
+    let resultIdx = -1;
+    for (const [url, data] of pageData.entries()) {
+        if (data.totalScore > maxScore || (data.totalScore === maxScore && data.idx < resultIdx)) {
+            maxScore = data.totalScore;
+            resultIdx = data.idx;
+        }
+    }
+    
+    return resultIdx;
+    
 }
