@@ -1,11 +1,10 @@
 const dx = [1, 0, -1, 0];
 const dy = [0, -1, 0, 1];
 
-function checkHome(i, j, visited, arr) {
+function checkHome(i, j, arr) {
   let cnt = 1;
   const q = [[i, j]];
-  visited[i][j] = true;
-
+  arr[i][j] = 0;
   while (q.length > 0) {
     let [x, y] = q.shift();
 
@@ -14,9 +13,9 @@ function checkHome(i, j, visited, arr) {
       let ny = y + dy[d];
       if (nx < 0 || nx >= N || ny < 0 || ny >= N) continue;
 
-      if (!visited[nx][ny] && arr[nx][ny]) {
+      if (arr[nx][ny]) {
         q.push([nx, ny]);
-        visited[nx][ny] = true;
+        arr[nx][ny] = 0;
         cnt += 1;
       }
     }
@@ -33,13 +32,10 @@ const arr = input.slice(1).map((l) => l.split("").map(Number));
 let cnt = 0;
 let ans = [];
 
-const visited = Array(N)
-  .fill()
-  .map(() => Array(N).fill(false));
 for (let i = 0; i < N; i++) {
   for (let j = 0; j < N; j++) {
-    if (arr[i][j] && !visited[i][j]) {
-      ans.push(checkHome(i, j, visited, arr));
+    if (arr[i][j]) {
+      ans.push(checkHome(i, j, arr));
       cnt++;
     }
   }
