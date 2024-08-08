@@ -1,7 +1,7 @@
 function makeSlice(str) {
     let map = new Map();
     for (let i = 0; i < str.length - 1; i++) {
-        if (/^[a-zA-Z]$/.test(str[i]) && /^[a-zA-Z]$/.test(str[i + 1])) {
+        if (str[i].match(/^[a-zA-Z]$/) && str[i + 1].match(/^[a-zA-Z]$/)) {
             let word = (str[i] + str[i + 1]).toLowerCase();
             map.set(word, (map.get(word) || 0) + 1); 
         }
@@ -20,7 +20,9 @@ function solution(str1, str2) {
     let uCount = 0;
 
     let allKeys = new Set([...map1.keys(), ...map2.keys()]);
-
+    
+    
+    // 각 키당 합집합과 교집합을 더해가며 구함
     for (let key of allKeys) {
         let count1 = map1.get(key) || 0;
         let count2 = map2.get(key) || 0;
