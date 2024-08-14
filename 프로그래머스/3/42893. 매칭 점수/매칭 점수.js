@@ -1,99 +1,112 @@
-function extractUrl(page) {
+function getBasicFromBody(page, word) {
+    const bStart = page.indexOf('<body>');
+    const bEnd = page.indexOf('</body>', bStart);
     
-    // [^"] : "를 제외한 모든 문자
-    // *s는 : 0회이상 반복되는 문자열
-    const pattern = /<meta property="og:url" content="([^"]*)"/;
-    const urlMatch = page.match(pattern);
-    return urlMatch ? urlMatch[1] : null;
-}
-function extractLinks(page) {
-    const pattern = /<a href="([^"]*)"/g;
-    const links = [];
-    let linkMatch;
-    while ((linkMatch = pattern.exec(page)) !== null) {
-        links.push(linkMatch[1]);
-    }
-    return links;
-}
+    if (bStart === -1 || bEnd === -1) return 0;
+    
+    let bodyContent = page.substring(bStart + '<body>'.length, bEnd);
+    bodyContent = bodyContent.toLowerCase();
+    const lowerWord = word.toLowerCase();
 
-function calculateBasicScore(bodyText, pattern) {
-    return (bodyText.match(pattern) || []).length;
-}
+    const words = bodyContent.split(/[^a-zA-Z]/);
+    let cnt = 0;
 
-function calculateLinkScores(pageData, pageLinks) {
-    // Map 내부에서 계산
-    for (const [pageUrl, links] of pageLinks.entries()) {
-        const currentPageData = pageData.get(pageUrl);
-        if (currentPageData && currentPageData.outLinksCount > 0) {
-            const linkScore = currentPageData.basicScore / currentPageData.outLinksCount;
-            for (const link of links) {
-                const linkedPageData = pageData.get(link);
-                if (linkedPageData) {
-                    linkedPageData.totalScore += linkScore;
-                }
-            }
+    for (const w of words) {
+        if (w === lowerWord) {
+            cnt++;
         }
     }
+
+    return cnt;
 }
 
-function calculateFinalScores(pageData) {
-    // Map 내부에서 계산
-    for (const [url, data] of pageData.entries()) {
-        data.totalScore += data.basicScore;
+
+function findMyUrl(page) {
+    const start = page.indexOf('<meta property="og:url" content="')
+    if (start === -1) return ""
+    const contentStart = start+'<meta property="og:url" content="'.length
+    const contentEnd = page.indexOf('"', contentStart)
+    const myLink = page.substring(contentStart, contentEnd)
+    return myLink
+    
+}
+
+function findConnectedUrl(page){
+    let links = []
+    let start = 0
+    let contentStart = 0
+    
+    while (true) {
+        start =  page.indexOf('<a href="', start)
+        if (start  ===-1) break
+        
+        contentStart = start + '<a href="'.length
+        const contentEnd = page.indexOf('"', contentStart)
+        const link = page.substring(contentStart, contentEnd)
+        links.push(link)
+        
+        start = contentEnd + 1
+        
     }
+    return links
 }
 
-
+// 기본점수 : 텍스트 중 검색어 등장 횟수(대소문자 무시)
+// 외부링크 수 : 해당 웹페이지에서 다른 외부페이지로 연결된 링크 갯수
+// 링크점수 : 링크가 걸린 다른 웹페이지 기본점수 / 외부 링크 수
+// 매칭점수 : 기본점수  + 링크점수
 function solution(word, pages) {
-    const numOfPages = pages.length;
-    const pageData = new Map();
-    const pageLinks = new Map();
+
+    let len = pages.length
+    const ownLinks = Array(len).fill()
+    const relatedLinks = Array(len).fill()
+    const basicScores = Array(len).fill(0)
+    const linkScores = Array(len).fill(0)
+    const relatedLinkCnt = Array(len).fill(0)
+    const matchScores = Array(len).fill(0)
     
-    // \b는 단어경계를 나타내서 단어 구분이 가능하게 함
-    const wordPattern = new RegExp(`\\b${word}\\b`, 'gi');
+    for (let i=0;i<len;i++) {
+        let page = pages[i]
+        
+        // 1. 자기 자신의 링크 추출
+        ownLinks[i] = findMyUrl(page)
+        
+        // 2. 외부링크 저장
+        relatedLinks[i] = findConnectedUrl(page)
+        
+        // 3. 기본점수 : body태그 내 단어 등장횟수
+        basicScores[i] = getBasicFromBody(page, word)   
+        
+    }
     
-    for (let i = 0; i < numOfPages; i++) {
-        const page = pages[i];
-        
-        // URL 추출(https://example.com 형태)
-        const url = extractUrl(page);
-        
-        if (url) {
-            // 연결된 a태그 추출(https://example.com 형태를 담은 리스트 추출)
-            const links = extractLinks(page);
-            pageLinks.set(url, links);
-            
-            // body 태그 내용 추출
-            const bodyMatch = page.split('<body>')[1]?.split('</body>')[0];
-            
-            if (bodyMatch) {
-                // 숫자와 특수문자 제거
-                const cleanBodyText = bodyMatch.replace(/[^a-zA-Z\s]/g, ' ');
-                const basicScore = calculateBasicScore(cleanBodyText, wordPattern);
-                
-                pageData.set(url, {
-                    idx: i,
-                    basicScore,
-                    outLinksCount: links.length,
-                    totalScore: 0
-                });
+    // 4. 링크점수
+    for (let i = 0;i<len;i++) {
+        relatedLinkCnt[i] = relatedLinks[i].length
+    }
+
+    for (let i = 0;i<len;i++) {
+        for (let j = 0; j < len; j++) {
+            if (relatedLinks[i].includes(ownLinks[j])) {
+                linkScores[j] += basicScores[i] / relatedLinkCnt[i]
             }
         }
     }
 
-    calculateLinkScores(pageData, pageLinks);
-    calculateFinalScores(pageData);
+    // 5. 매칭점수
+    for (let i=0;i<len;i++) {
+        matchScores[i] =  basicScores[i] + linkScores[i]
+    }
     
-    // idx 업데이트
-    let maxScore = -Infinity;
-    let resultIdx = -1;
-    for (const [url, data] of pageData.entries()) {
-        if (data.totalScore > maxScore || (data.totalScore === maxScore && data.idx < resultIdx)) {
-            maxScore = data.totalScore;
-            resultIdx = data.idx;
+    
+    // 6. 최종
+    let ans = 0
+    let maxVal = -1
+    for (let i =0; i<len;i++) {
+        if (matchScores[i] > maxVal) {
+            maxVal = matchScores[i]
+            ans = i
         }
     }
     
-    return resultIdx;
-    
+    return ans;
 }
