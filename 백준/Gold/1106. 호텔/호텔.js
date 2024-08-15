@@ -6,7 +6,7 @@ const [C, N] = input[0].split(" ").map(Number);
 const costs = input.slice(1).map((line) => line.split(" ").map(Number));
 
 // 고객 명수 당 최소 비용 저장 dp
-const dp = Array(100000).fill(Infinity);
+const dp = Array(2000).fill(Infinity);
 dp[0] = 0;
 
 for (const [cost, person] of costs) {
