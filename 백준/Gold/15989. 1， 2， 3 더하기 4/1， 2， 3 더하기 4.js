@@ -13,9 +13,6 @@ for (let i = 4; i <= 10000; i++) {
   dp[i][3] = dp[i - 3][1] + dp[i - 3][2] + dp[i - 3][3];
 }
 
-function findSum(N) {
-  return dp[N][1] + dp[N][2] + dp[N][3];
-}
 
 // n을 1,2,3의 합으로 나타내는 방법의 수
 const filePath = process.platform === "linux" ? "/dev/stdin" : "./15989.txt";
@@ -25,6 +22,6 @@ const T = parseInt(input[0]);
 
 for (let i = 1; i <= T; i++) {
   const N = parseInt(input[i]);
-  let ans = findSum(N);
+  let ans = dp[N][1] + dp[N][2] + dp[N][3];
   console.log(ans);
 }
