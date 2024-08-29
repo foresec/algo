@@ -22,20 +22,18 @@ const [N, C] = input[0].split(" ").map(Number);
 const houses = input.slice(1).map(Number);
 houses.sort((a, b) => a - b);
 
-let ans = Infinity;
 
 let left = 1;
-let right = 1000000000;
+let right = houses.at(-1)
 
 while (left <= right) {
   const mid = Math.floor((left + right) / 2);
 
   if (inHouse(houses, mid, C)) {
     left = mid + 1;
-    ans = mid;
   } else {
     right = mid - 1;
   }
 }
 
-console.log(ans);
+console.log(right);
