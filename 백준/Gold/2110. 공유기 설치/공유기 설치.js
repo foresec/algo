@@ -2,7 +2,7 @@ function inHouse(houses, val, C) {
   let cnt = 1;
   let current = houses[0];
 
-  for (let i = 0; i < houses.length; i++) {
+  for (let i = 1; i < houses.length; i++) {
     if (houses[i] - current >= val) {
       cnt++;
       current = houses[i];
