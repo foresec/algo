@@ -1,14 +1,14 @@
 function isSurvive(curATK, maxHP, arr) {
   let curHP = BigInt(maxHP);
-  curATK = BigInt(curATK); // 공격력도 BigInt로 변환
+  curATK = BigInt(curATK);
 
   for (let [type, atk, hp] of arr) {
     const atkBigInt = BigInt(atk);
     const hpBigInt = BigInt(hp);
 
     if (type === 1) {
-      const turnsToKill = (hpBigInt + curATK - 1n) / curATK;
-      curHP -= atkBigInt * (turnsToKill - 1n);
+      const killCnt = (hpBigInt + curATK - 1n) / curATK;
+      curHP -= atkBigInt * (killCnt - 1n);
     } else {
       curATK += atkBigInt;
       curHP = curHP + hpBigInt;
@@ -43,7 +43,7 @@ let answer = BigInt(0);
 while (start <= end) {
   const mid = (start + end) / 2n;
 
-  if (isSurvive(Number(A), Number(mid), arr)) {
+  if (isSurvive(A, mid, arr)) {
     answer = mid;
     end = mid - 1n;
   } else {
