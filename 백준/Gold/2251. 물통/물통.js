@@ -1,3 +1,12 @@
+const dir = [
+  [0, 1], // AB
+  [0, 2], // AC
+  [1, 0], // BA
+  [1, 2], // BC
+  [2, 0], // CA
+  [2, 1], // CB
+];
+
 function bfs(a, b, c) {
   let q = [[a, b, c]];
   visited[a][b] = true;
@@ -5,23 +14,22 @@ function bfs(a, b, c) {
   while (q.length) {
     let [a, b, c] = q.shift();
 
-    if (a === 0) {
-      cntSet.add(c);
-    }
+    if (a === 0) cntSet.add(c);
 
-    let waterMove = [
-      [Math.max(a - (B - b), 0), Math.min(B, a + b), c],
-      [Math.max(a - (C - c), 0), b, Math.min(C, a + c)],
-      [Math.min(A, a + b), Math.max(b - (A - a), 0), c],
-      [a, Math.max(b - (C - c), 0), Math.min(C, b + c)],
-      [Math.min(A, a + c), b, Math.max(c - (A - a), 0)],
-      [a, Math.min(B, b + c), Math.max(c - (B - b), 0)],
-    ];
+    for (let [from, to] of dir) {
+      let nn = [a, b, c].slice();
 
-    for (let [na, nb, nc] of waterMove) {
-      if (!visited[na][nb]) {
-        visited[na][nb] = true;
-        q.push([na, nb, nc]);
+      // 이동 가능한 물의 양
+      const val = Math.min(nn[from], arr[to] - nn[to]);
+
+      // 물 이동
+      nn[from] -= val;
+      nn[to] += val;
+
+      // 첫/두번째 물통 체크 확인
+      if (!visited[nn[0]][nn[1]]) {
+        visited[nn[0]][nn[1]] = true;
+        q.push(nn);
       }
     }
   }
@@ -39,6 +47,7 @@ const visited = Array(201)
   .map(() => Array(201).fill(false));
 
 const cntSet = new Set();
+const arr = [A, B, C];
 
 bfs(0, 0, C);
 
