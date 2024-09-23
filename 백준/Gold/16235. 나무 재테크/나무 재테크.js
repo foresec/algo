@@ -1,8 +1,6 @@
 const dx = [1, 0, -1, 0, 1, 1, -1, -1];
 const dy = [0, -1, 0, 1, 1, -1, -1, 1];
 
-// 봄 : 나이만큼 양분을 먹고, 나이가 1 증가
-// 여러개의 나무가 있다면 나이가 어린 나무부터 먹으며, 나이만큼 못먹을시 즉사
 function springandsummer() {
   // food
   for (let i = 0; i < N; i++) {
@@ -19,6 +17,7 @@ function springandsummer() {
           alive.push(age + 1);
         } else {
           deadTree += Math.floor(age / 2);
+					// break
         }
       }
       tree[i][j] = alive;
@@ -27,7 +26,6 @@ function springandsummer() {
   }
 }
 
-// 가을 : 나이가 5의배수인 나무 번식, 주변 8개 칸에 나이가 1인 나무 생성
 function autumn() {
   for (let i = 0; i < N; i++) {
     for (let j = 0; j < N; j++) {
@@ -45,7 +43,6 @@ function autumn() {
   }
 }
 
-// 겨울 : 양분추가
 function winter() {
   for (let i = 0; i < N; i++) {
     for (let j = 0; j < N; j++) {
@@ -54,7 +51,6 @@ function winter() {
   }
 }
 
-// K년이 지난 후 살아남은 나무의 수
 const fs = require("fs");
 const filePath = process.platform === "linux" ? "/dev/stdin" : "./16235.txt";
 let input = fs.readFileSync(filePath).toString().trim().split("\n");
@@ -69,10 +65,6 @@ const food = Array.from({ length: N }, () =>
   Array.from({ length: N }, () => 5)
 );
 
-// const deadTrees = Array.from({ length: N }, () =>
-//   Array.from({ length: N }, () => [])
-// );
-
 for (let i = 1; i < N + 1; i++) {
   plus.push(input[i].split(" ").map(Number));
 }
@@ -83,8 +75,6 @@ for (let i = 1 + N; i < M + N + 1; i++) {
 }
 
 for (let k = 0; k < K; k++) {
-  // spring();
-  // summer();
   springandsummer();
   autumn();
   winter();
