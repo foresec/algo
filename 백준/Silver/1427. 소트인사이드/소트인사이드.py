@@ -1,14 +1,12 @@
 N = input()
-num_dict = {}
+num_list = [0] * 10
 answer = ""
 
-for w in N:
-    num_dict[w] = num_dict.get(w, 0) + 1
+for num in N:
+    num_list[int(num)] += 1
 
-num_list = sorted(num_dict.items(), key=lambda x: -int(x[0]))
 
-for num , cnt in num_list:
-    answer += num * cnt
+for i in range(9, -1, -1):
+    answer += str(i) * num_list[i]
 
 print(answer)
-    
