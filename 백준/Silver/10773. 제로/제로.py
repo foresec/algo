@@ -9,7 +9,7 @@ for _ in range(K):
 
     if num != 0:
         stack.append(num)
-    elif num == 0 and len(stack) != 0:
+    elif num == 0 and stack != 0:
         stack.pop(-1)
 
 
