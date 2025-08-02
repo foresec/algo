@@ -18,7 +18,8 @@ while True:
             if stack and dict[alpha] == stack[-1]:
                 stack.pop(-1)
             else:
-                stack.append(alpha)
+                ans = "no"
+                break
 
     if stack:
         ans = "no"
