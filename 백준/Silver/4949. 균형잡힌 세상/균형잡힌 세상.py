@@ -12,9 +12,9 @@ while True:
     ans = "yes"
 
     for alpha in s:
-        if alpha in ["(", "["]:
+        if alpha in "([":
             stack.append(alpha)
-        elif alpha in [")", "]"]:
+        elif alpha in ")]":
             if stack and dict[alpha] == stack[-1]:
                 stack.pop(-1)
             else:
