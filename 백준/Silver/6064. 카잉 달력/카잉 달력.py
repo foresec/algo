@@ -1,6 +1,5 @@
-
-import math
-
+import math, sys
+input= sys.stdin.readline
 
 def get_lcm(a, b):
     if a == 0 or b == 0:
