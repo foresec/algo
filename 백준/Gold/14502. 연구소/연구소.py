@@ -1,59 +1,54 @@
+import sys
 from itertools import combinations
 from collections import deque
-
-import copy
 
 dx = [1, 0, -1, 0]
 dy = [0, -1, 0, 1]
 
+def dfs(i, j, visited, arr):
+    stack = [(i, j)]
+    visited[i][j] = True
 
-def bfs(viruses, area):
-    left_area = 0
-
-    # 바이러스
-    q = deque(viruses)
-
-    while q:
-        x, y = q.popleft()
+    while stack:
+        x, y = stack.pop()
 
         for d in range(4):
-            nx = x + dx[d]
-            ny = y + dy[d]
+            nx, ny = x + dx[d], y + dy[d]
 
-            if nx < 0 or nx >= N or ny < 0 or ny >= M:
+            if nx < 0 or ny < 0 or nx >= N or ny >= M:
                 continue
 
-            if area[nx][ny] == 0:
-                area[nx][ny] = 2
-                q.append((nx, ny))
-
-    # 안전영역 갯수
-    for i in range(N):
-        for j in range(M):
-            if area[i][j] == 0:
-                left_area += 1
-    return left_area
-
+            if arr[nx][ny] == 0 and not visited[nx][ny]:                
+                stack.append((nx, ny))
+                visited[nx][ny] = True
+                arr[nx][ny] = 2
 
 N, M = map(int, input().split())
 arr = [list(map(int, input().split())) for _ in range(N)]
 
-safety = []
-viruses = []
-for i in range(N):
-    for j in range(M):
-        if arr[i][j] == 0:
-            safety.append((i, j))
-        elif arr[i][j] == 2:
-            viruses.append((i, j))
+empty = [(i, j) for i in range(N) for j in range(M) if arr[i][j] == 0]
+
 ans = 0
 
-for combination in combinations(safety, 3):
-    this_arr = copy.deepcopy(arr)
-    for x, y in combination:
-        this_arr[x][y] = 1
+for comb in combinations(empty, 3):
+    check_arr = [row[:] for row in arr]
+    cnt = 0
 
-    val = bfs(viruses, this_arr)
-    ans = max(ans, val)
+    for i, j in comb:
+        check_arr[i][j] = 1
+
+    visited = [[False] * M for _ in range(N)]
+
+    for i in range(N):
+        for j in range(M):
+            if check_arr[i][j] == 2 and not visited[i][j]:
+                dfs(i, j, visited, check_arr)
+
+    for i in range(N):
+        for j in range(M):
+            if check_arr[i][j] == 0:
+                cnt += 1
+
+    ans = max(ans, cnt)
 
 print(ans)
