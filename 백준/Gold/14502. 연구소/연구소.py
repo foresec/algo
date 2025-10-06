@@ -1,54 +1,58 @@
-import sys
 from itertools import combinations
 from collections import deque
+
+import sys
+
+input = sys.stdin.readline
 
 dx = [1, 0, -1, 0]
 dy = [0, -1, 0, 1]
 
-def dfs(i, j, visited, arr):
-    stack = [(i, j)]
-    visited[i][j] = True
 
-    while stack:
-        x, y = stack.pop()
+def bfs(viruses, area):
+    infected_area = 0
+
+    # 바이러스
+    q = deque(viruses)
+
+    while q:
+        x, y = q.popleft()
 
         for d in range(4):
-            nx, ny = x + dx[d], y + dy[d]
+            nx = x + dx[d]
+            ny = y + dy[d]
 
-            if nx < 0 or ny < 0 or nx >= N or ny >= M:
+            if nx < 0 or nx >= N or ny < 0 or ny >= M:
                 continue
 
-            if arr[nx][ny] == 0 and not visited[nx][ny]:                
-                stack.append((nx, ny))
-                visited[nx][ny] = True
-                arr[nx][ny] = 2
+            if area[nx][ny] == 0:
+                area[nx][ny] = 2
+                q.append((nx, ny))
+                infected_area += 1
+
+    return infected_area
+
 
 N, M = map(int, input().split())
 arr = [list(map(int, input().split())) for _ in range(N)]
 
-empty = [(i, j) for i in range(N) for j in range(M) if arr[i][j] == 0]
-
+safety = []
+viruses = []
+for i in range(N):
+    for j in range(M):
+        if arr[i][j] == 0:
+            safety.append((i, j))
+        elif arr[i][j] == 2:
+            viruses.append((i, j))
 ans = 0
 
-for comb in combinations(empty, 3):
-    check_arr = [row[:] for row in arr]
-    cnt = 0
+safety_cnt = len(safety)
+for combination in combinations(safety, 3):
+    this_arr = [row[:] for row in arr]
+    for x, y in combination:
+        this_arr[x][y] = 1
 
-    for i, j in comb:
-        check_arr[i][j] = 1
-
-    visited = [[False] * M for _ in range(N)]
-
-    for i in range(N):
-        for j in range(M):
-            if check_arr[i][j] == 2 and not visited[i][j]:
-                dfs(i, j, visited, check_arr)
-
-    for i in range(N):
-        for j in range(M):
-            if check_arr[i][j] == 0:
-                cnt += 1
-
-    ans = max(ans, cnt)
+    infected = bfs(viruses, this_arr)
+    ans = max(ans, safety_cnt - infected - 3)
 
 print(ans)
